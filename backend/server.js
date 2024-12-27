@@ -1,29 +1,22 @@
-// server.js
 const express = require('express');
-const dotenv = require('dotenv');
-const cors = require('cors');
-const connectDB = require('./config/db');
-
-// Load environment variables
-dotenv.config();
+const connectDB = require('./config/db'); // Import the DB config
+require('dotenv').config();
 
 const app = express();
+const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(express.json());
-app.use(cors());
-
-// Routes
-app.get('/', (req, res) => {
-  res.send('API is running...');
-});
 
 // Connect to MongoDB
 connectDB();
 
+// Example route
+app.get('/', (req, res) => {
+  res.send('Server is running and connected to MongoDB!');
+});
+
 // Start the server
-const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
