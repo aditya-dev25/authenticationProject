@@ -1,15 +1,20 @@
 const express = require('express');
 const connectDB = require('./config/db'); // Import the DB config
 require('dotenv').config();
+const userRoutes = require('./src/auth/controller/userController'); // Path to userController
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(express.json());
+// app.use(express.urlencoded({ extended: true })); // Parses URL-encoded bodies
 
 // Connect to MongoDB
 connectDB();
+
+// Routes
+app.use("/api/users", userRoutes);
 
 // Example route
 app.get('/', (req, res) => {

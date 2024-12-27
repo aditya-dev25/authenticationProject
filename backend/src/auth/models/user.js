@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema(
       required: true,
       minlength: 6, // Password should be at least 6 characters long
       match: [
-        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!$%^&*?])[A-Za-z\d!$%^&*?]{6,}$/, // Password regex: at least 1 letter, 1 number, and 1 special character
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/, // Password regex: at least 1 letter, 1 number, and 1 special character
         'Password must be at least 6 characters long and include at least one letter, one number, and one special character.',
       ],
     },
