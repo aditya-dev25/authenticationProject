@@ -1,90 +1,103 @@
-// SignUp.js
-
 import React, { useState } from 'react';
 import axios from 'axios';
-import { toast, ToastContainer } from 'react-toastify'; // Importing ToastContainer from react-toastify
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './Auth.css'; // Use the updated shared CSS file
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
+  const [showRedirectMessage, setShowRedirectMessage] = useState(false);
+  const navigate = useNavigate();
 
-  // Function to handle the form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!email || !password) {
-      toast.error("Please fill in both fields.");
-      return;
-    }
-
-    setLoading(true);
     try {
-      // API call to backend
-      const response = await axios.post('http://localhost:5000/api/users/signup', {
-        email,
-        password,
-      });
-
-      // Success toast
+      const response = await axios.post('http://localhost:5000/api/users/signup', { email, password });
       toast.success(response.data.message);
-      setEmail('');
-      setPassword('');
+      setShowRedirectMessage(true);
+      setTimeout(() => navigate("/signin"), 3000); // Redirect after 3 seconds
     } catch (error) {
-      // Error toast
-      if (error.response) {
-        toast.error(error.response.data.message || 'Signup failed.');
+      if (error.response && error.response.status === 409) {
+        toast.error('User already exists. Redirecting to Sign In...');
+        setTimeout(() => navigate("/signin"), 3000); // Redirect after 3 seconds
       } else {
-        toast.error('Network error or server unavailable.');
+        toast.error(error.response?.data?.message || 'Signup failed.');
       }
-    } finally {
-      setLoading(false);
     }
   };
 
   return (
-    <div className="container mt-5">
-      <h1 className="text-center mb-4">SignUp</h1>
-      <div className="row justify-content-center">
-        <div className="col-md-6">
-          <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <label htmlFor="email" className="form-label">Email</label>
-              <input
-                type="email"
-                className="form-control"
-                id="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="password" className="form-label">Password</label>
-              <input
-                type="password"
-                className="form-control"
-                id="password"
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                minLength="6"
-              />
-            </div>
-            <div className="d-grid gap-2">
-              <button type="submit" className="btn btn-primary" disabled={loading}>
-                {loading ? 'Signing Up...' : 'Sign Up'}
+    <div className="auth-container">
+      <div className="auth-box">
+        {!showRedirectMessage ? (
+          <>
+            <h1 className="auth-header">Sign Up</h1>
+            <form onSubmit={handleSubmit}>
+              <div className="form-group mb-3">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  className="form-control"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+              <div className="form-group mb-3">
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  className="form-control"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your password"
+                  required
+                  minLength="6"
+                />
+              </div>
+              <div className="form-group form-check mb-3">
+                <input
+                  type="checkbox"
+                  id="checkbox"
+                  className="form-check-input"
+                  checked={isCheckboxChecked}
+                  onChange={(e) => setIsCheckboxChecked(e.target.checked)}
+                />
+                <label htmlFor="checkbox" className="form-check-label">
+                  I agree to the terms and conditions
+                </label>
+              </div>
+              <button
+                type="submit"
+                className={`btn w-100 ${isCheckboxChecked ? 'btn-primary' : 'btn-secondary'}`}
+                disabled={!isCheckboxChecked}
+              >
+                Submit
               </button>
+            </form>
+            <div className="mt-3 text-center">
+              <p>
+                Already have an account?{' '}
+                <span className="auth-link" onClick={() => navigate("/signin")}>
+                  Sign In
+                </span>
+              </p>
             </div>
-          </form>
-        </div>
+          </>
+        ) : (
+          <div className="redirect-box">
+            <h3>Signup Successful!</h3>
+            <p>Redirecting to the Login page...</p>
+          </div>
+        )}
+        <ToastContainer />
       </div>
-
-      {/* ToastContainer to show notifications */}
-      <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
     </div>
   );
 };
