@@ -46,7 +46,7 @@ The application was primarily developed with the help of **ChatGPT**, an advance
 ## How It Works
 
 ### 1. **User Registration (Sign Up)**
-   - The user enters their **email** and **password**.
+   - The user enters their **email** and **password**, and agree to the terms and conditions (via a checkbox).
    - reCAPTCHA verification is required to prevent bots.
    - A POST request is made to the backend to create the user's account.
    - If the user already exists, an error message is shown. If registration is successful, the user is redirected to the Sign In page.

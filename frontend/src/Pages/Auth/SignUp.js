@@ -43,6 +43,8 @@ const SignUp = () => {
     setRecaptchaToken(token);
   };
 
+  const isFormValid = isCheckboxChecked && recaptchaToken;
+
   return (
     <div className="auth-container">
       <div className="auth-box">
@@ -93,8 +95,8 @@ const SignUp = () => {
               />
               <button
                 type="submit"
-                className={`btn w-100 ${isCheckboxChecked ? 'btn-primary' : 'btn-secondary'}`}
-                disabled={!isCheckboxChecked}
+                className={`btn w-100 ${isFormValid ? 'btn-primary' : 'btn-secondary'}`}
+                disabled={!isFormValid} // Disable button if form is not valid
               >
                 Submit
               </button>
