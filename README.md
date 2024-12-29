@@ -5,6 +5,7 @@
 This project is a **MERN (MongoDB, Express, React, Node.js)** authentication app designed to handle user registration, login, and protected routes with JWT (JSON Web Token) authentication. 
 /
 The application was primarily developed with the help of **ChatGPT**, an advanced Generative AI (GenAI) model, minimizing the need for manual code writing and making the development process faster and more efficient. 
+
 ---
 
 ## Features
