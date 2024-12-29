@@ -56,9 +56,10 @@ The application was primarily developed with the help of **ChatGPT**, an advance
    - The backend authenticates the user, returns a JWT token, and the token is saved in localStorage.
    - If successful, the user is redirected to the Home page with authenticated access.
 
-### 3. **Protected Routes**
+### 3. **Protected Routes & Logout Action**
    - Routes like the **Home** page are protected. Only authenticated users (with valid JWT tokens) can access them.
    - If a user tries to access a protected route without being authenticated, they are redirected to the Sign In page.
+   - If the User clicks on the Logout Button when logged in, they are redirected to the Sign In page. The JWT token is removed from localStorage.
 
 ---
 
