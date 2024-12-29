@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isCheckboxChecked, setIsCheckboxChecked] = useState(false); // State for checkbox
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -59,7 +60,23 @@ const SignIn = () => {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary w-100">
+        <div className="form-group form-check mb-3">
+          <input
+            type="checkbox"
+            id="checkbox"
+            className="form-check-input"
+            checked={isCheckboxChecked}
+            onChange={(e) => setIsCheckboxChecked(e.target.checked)} // Update state on checkbox change
+          />
+          <label htmlFor="checkbox" className="form-check-label">
+            I agree to the terms and conditions
+          </label>
+        </div>
+        <button
+          type="submit"
+          className={`btn w-100 ${isCheckboxChecked ? 'btn-primary' : 'btn-secondary'}`}
+          disabled={!isCheckboxChecked} // Disable button when checkbox is unchecked
+        >
           Submit
         </button>
       </form>
