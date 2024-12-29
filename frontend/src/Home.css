@@ -1,0 +1,84 @@
+/* Container for the home page */
+.home-container {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    width: 100%;
+    min-height: 100vh; /* Ensure it takes up the full height of the viewport */
+    background-color: #f4f7fc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  /* Header section */
+  .welcome-section {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .welcome-section h1 {
+    color: #2c3e50;
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  .welcome-section p {
+    font-size: 18px;
+    color: #7f8c8d;
+  }
+  
+  /* About project section - 50% width and centered */
+  .info-section {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    max-width: 800px; /* To make it responsive and avoid overflowing */
+    margin-top: 50px; /* Space between sections */
+    text-align: center;
+  }
+  
+  /* Features section */
+  .features-section {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 900px; /* To maintain good layout on large screens */
+    margin-top: 40px;
+    text-align: center;
+  }
+  
+  .features-section h2 {
+    font-size: 28px;
+    color: #34495e;
+    margin-bottom: 20px;
+  }
+  
+  .features-section ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .features-section li {
+    font-size: 16px;
+    color: #7f8c8d;
+    margin-bottom: 10px;
+  }
+  
+  /* Footer section */
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 14px;
+    color: #95a5a6;
+  }
+  
+  .footer p {
+    margin: 0;
+  }
+  
