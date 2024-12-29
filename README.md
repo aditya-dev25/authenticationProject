@@ -68,10 +68,6 @@ The application was primarily developed with the help of **ChatGPT**, an advance
 
 ---
 
-## Installation
+## License
 
-Follow these steps to set up the application on your local machine:
-
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/aditya-dev25/authenticationProject.git
+This project is licensed under the MIT License.
