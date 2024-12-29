@@ -64,7 +64,9 @@ The application was primarily developed with the help of **ChatGPT**, an advance
 
 ## Demo
 
+##### You can view a demo of the SignUP / SignIn process in action here:
 
+https://github.com/user-attachments/assets/b8172a3b-6e59-471d-b211-3bf44484a53d
 
 ---
 
