@@ -2,6 +2,7 @@ const express = require('express');
 const User = require('../models/user');  // Path to your User model
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const authMiddleware = require('../middlewares/jwtMiddlewares')
 
 const router = express.Router();
 
@@ -77,6 +78,11 @@ router.post('/login', async (req, res) => {
     console.error(error);
     res.status(500).json({ message: 'Server error. Please try again later.' });
   }
+});
+
+// Token validation route
+router.get('/verifyToken', authMiddleware, (req, res) => {
+  res.status(200).json({ message: 'Token is valid.' });
 });
 
 module.exports = router;
