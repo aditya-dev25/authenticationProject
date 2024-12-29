@@ -26,7 +26,7 @@ The application was primarily developed with the help of **ChatGPT**, an advance
   - React Router DOM
   - Bootstrap for styling
   - React Toastify for notifications
-  - reCAPTCHA v3 for bot prevention
+  - reCAPTCHA v2 Tickbox for bot prevention
 
 - **Backend**:
   - Node.js
@@ -64,7 +64,7 @@ The application was primarily developed with the help of **ChatGPT**, an advance
 
 ## Demo
 
-The app is available for live demo at [Insert Link to Demo Here].
+
 
 ---
 
@@ -74,4 +74,4 @@ Follow these steps to set up the application on your local machine:
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/mern-auth-app.git
+   git clone https://github.com/aditya-dev25/authenticationProject.git
