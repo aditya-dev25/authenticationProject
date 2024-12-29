@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
+import ReCAPTCHA from 'react-google-recaptcha';
 import 'react-toastify/dist/ReactToastify.css';
 import './Auth.css'; // Use the updated shared CSS file
 
@@ -10,12 +11,19 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
   const [showRedirectMessage, setShowRedirectMessage] = useState(false);
+  const [recaptchaToken, setRecaptchaToken] = useState(""); // reCAPTCHA token
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!recaptchaToken) {
+      toast.error('Please complete the reCAPTCHA verification.');
+      return;
+    }
+
     try {
-      const response = await axios.post('http://localhost:5000/api/users/signup', { email, password });
+      const response = await axios.post('http://localhost:5000/api/users/signup', { email, password, recaptchaToken });
       toast.success(response.data.message);
       setShowRedirectMessage(true);
       setTimeout(() => navigate("/signin"), 3000); // Redirect after 3 seconds
@@ -26,7 +34,13 @@ const SignUp = () => {
       } else {
         toast.error(error.response?.data?.message || 'Signup failed.');
       }
+
+      
     }
+  };
+
+  const onRecaptchaChange = (token) => {
+    setRecaptchaToken(token);
   };
 
   return (
@@ -73,6 +87,10 @@ const SignUp = () => {
                   I agree to the terms and conditions
                 </label>
               </div>
+              <ReCAPTCHA
+                sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+                onChange={onRecaptchaChange}
+              />
               <button
                 type="submit"
                 className={`btn w-100 ${isCheckboxChecked ? 'btn-primary' : 'btn-secondary'}`}

@@ -2,12 +2,13 @@ const express = require('express');
 const User = require('../models/user');  // Path to your User model
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const authMiddleware = require('../middlewares/jwtMiddlewares')
+const authMiddleware = require('../middlewares/jwtMiddlewares');
+const validateReCAPTCHA = require('../middlewares/validateReCAPTCHA');
 
 const router = express.Router();
 
 // POST /signup - User signup
-router.post('/signup', async (req, res) => {
+router.post('/signup', validateReCAPTCHA, async (req, res) => {
   const { email, password } = req.body;
 
   // Check if email and password are provided
@@ -44,7 +45,7 @@ router.post('/signup', async (req, res) => {
 
 
 // POST /login - User login
-router.post('/login', async (req, res) => {
+router.post('/login', validateReCAPTCHA, async (req, res) => {
   const { email, password } = req.body;
 
   // Validate request body
